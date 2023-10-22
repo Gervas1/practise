@@ -1,0 +1,30 @@
+#include<iostream>
+
+using namespace std;
+
+const int N = 1e6 + 10 ;
+int q[N];
+
+/*选择排序*/
+void select(int q[] , int n ){
+	for(int i = 0 ; i < n ; i ++ ) {
+		int min = q[i];//升序
+		int z=i;
+		for(int j = i ; j < n ; j ++){
+			if( min > q[j] ) {//选择最小的元素
+				min = q[j];//找到最小的元素将它作为最小值
+				z = j;//记录最小值的下标，便于一重循环的j
+			}
+		}
+		swap(q[i] , q[z]);
+	}
+}
+
+int main(){
+	int n;
+	cin >> n;
+	for(int i = 0 ; i < n ; i ++ ) cin >> q[i];
+	select( q , n );
+	for(int i = 0 ; i < n ; i ++ ) cout<< q[i] <<" ";
+	return 0;
+}
