@@ -1,0 +1,38 @@
+#include<iostream>
+
+using namespace std;
+
+const int N = 1e6 + 10;
+
+int q[N];
+int m, n;
+
+int main(){
+	cin >> n >> m；
+	for(int i = 0; i < n; i ++ ) cin >> q[i];
+	while(m --){
+		int x;
+		cin >> x;
+		/*先查找第一次出现该值的位置下标*/
+		int l = 0, r = n - 1;
+		while(l < r){
+			int mid = l + r >> 1;//向左移动一位相当于除以2，第一次接触可以自己代值进行验算
+			if(q[mid] >= x) r = mid;
+			else l = mid + 1;
+		}
+		if(q[l] != x) cout << "-1 -1" <<endl;
+		else {
+			cout << l << " ";
+			/*此处进行查找最后一次出现该值的位置下标*/
+			int l = 0, r = n - 1;
+			while(l < r){
+				int mid = r + l + 1 >> 1;//此处 +1 的目的是为了查找到最后一个值
+				if(q[mid] <= x) l = mid;
+				else r = mid - 1;
+			}
+			cout << l << endl;
+		}
+	}
+	return 0;
+}
+
