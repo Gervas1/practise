@@ -1,0 +1,40 @@
+#include<iostream>
+#include<algorithm>
+#include<map>
+
+using namespace std;
+
+typedef long long ll;
+
+const ll mod = 1e9 + 7;
+
+int main()
+{
+    int n;
+    cin >> n;
+    map<int, int> primes; // 通过哈希表存储底数和指数
+    
+    while(n -- )
+    {
+        int x;
+        cin >> x;
+        for(int i = 2; i <= x / i; i ++ )
+        {
+            while(x % i == 0)
+            {
+                x /= i;
+                primes[i] ++ ; 
+            }
+        }
+        if(x > 1) primes[x] ++ ; 
+    }
+    ll res = 1;
+    /* res = 各个底数的指数 + 1 相乘 */
+    for(auto prime : primes)
+    {
+        res = res * (prime.second + 1) % mod;
+    }
+    
+    cout << res << endl;
+    return 0;
+}
