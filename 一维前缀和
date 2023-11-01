@@ -1,0 +1,22 @@
+#include<iostream>
+
+using namespace std;
+
+const int N = 1e5 + 10;
+
+int a[N];
+int s[N];
+
+int main(){
+    int n, m;
+    cin >> n >> m;
+    for(int i = 1; i <= n; i ++ ) scanf("%d", &a[i]);
+    s[0] = 0;//前缀和从1开始所以将其赋0
+    for(int i = 1; i <= n ;i ++ ) s[i] = s[i - 1] + a[i];
+    while(m --) {
+        int x, y;
+        scanf("%d%d", &x, &y);
+        printf("%d\n", s[y] - s[x - 1]); // 求区间的值
+    }
+    return 0;
+}
