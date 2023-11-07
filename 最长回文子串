@@ -1,0 +1,45 @@
+难度系数：🚩🚩
+
+🚀 题目
+给你一个字符串 s，找到 s 中最长的回文子串。
+
+示例 1：
+输入：s = "babad"
+输出："bab"
+解释："aba" 同样是符合题意的答案。
+
+示例 2：
+输入：s = "cbbd"
+输出："bb"
+
+🚀 答案
+本题利用了中心扩展法
+class Solution {
+    public String longestPalindrome(String s) {
+        char[] cs = s.toCharArray();
+        int res = 0;
+        int max = 0;
+        int start = 0, end = 0;
+        String ans = "";
+        for(int i = 0;i < cs.length; i++){
+            int left = i - 1, right = i + 1;
+            while(left >= 0 && cs[left] == cs[i]) left--;
+            while(right < cs.length && cs[right] == cs[i]) right++;
+            while(left >= 0 && right < cs.length && cs[left] == cs[right]){
+                left--;
+                right++;
+            }
+            max = Math.max(max, right - left - 1);
+            res = right - left - 1;
+            //System.out.println(" i = " + i + " l = " + left + " r = " + right);
+            if(res == max){
+                //left和right退出循环的话会多移动一位，所以要移动回去
+                start = left + 1;
+                end = right - 1;
+                //System.out.println(start + "  " + end);
+            }
+        }
+        //左闭右开区间，所以end + 1
+        return s.substring(start, end + 1);
+    }
+}
