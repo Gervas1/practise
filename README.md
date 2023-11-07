@@ -1,7 +1,6 @@
 # practise
 算法练习
 #include<iostream>
-
 using namespace std;
 
 const int N = 1e6 + 10;
