@@ -10,7 +10,6 @@ Y   I   R
 
 string convert(string s, int numRows);
 
-
 示例 1：
 输入：s = "PAYPALISHIRING", numRows = 4
 输出："PINALSIGYAHRPI"
