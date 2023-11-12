@@ -3,7 +3,6 @@
 using namespace std;
 const int N = 1e6 +10;
 int q[N], tmp[N];//定义两个数组，第一个是待排序的数组，第二个是用来将两个单调的数组进行汇总的数组，也可以理解为一个辅助数组
-
 void merge_sort(int q[], int l, int r){
 	if (l >= r) return ;
 	int mid = l + r >> 1;//l+r除以二
