@@ -1,0 +1,11 @@
+编写一个随机产生1和12之间的整数的程序，并且根据数字显示相应的月份单词
+#include<iostream>
+#include<cstdlib>
+#include <ctime>
+using namespace std;
+void main()
+{
+	srand((unsigned)time(0));
+	char *month[]={"January","February","March","April","May","June","July","August","September","October","November","December"};
+	cout<<month[rand()%12]<<endl;
+}
