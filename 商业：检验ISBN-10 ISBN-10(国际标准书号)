@@ -1,0 +1,23 @@
+检验ISBN-10 ISBN-10(国际标准书号)由十个个位整数d1 d2 d3 d4 d5 d6 d7 d8 d9 d10组成，最后一位d10是校验和，它是使用下面公式用另外9位数字计算出来的
+(d11+d22+d33+d44+d55+d66+d77+d88+d9*9)%11,如果最后一位是10，那么按照ISBN-10的习惯，最后一位应该表示为X
+提示用户输入前9个数，然后显示10位ISBN
+#include<iostream>
+#include<string>
+using namespace std;
+void main()
+{
+	cout<<"请输入ISBN-10前九位数：";
+	string isbn;
+	do
+	{
+		cin>>isbn;
+	}
+	while(isbn.length()!=9);
+	int p=0;
+	for(int i=0;i<9;i++)
+	{
+		p+=(isbn[i]-48)*(i+1);
+	}
+	isbn+=(p%11==10?'X':p%11+48);
+	cout<<isbn;
+}
