@@ -1,0 +1,18 @@
+计算三角形周长
+#include<iostream>
+using namespace std;
+void main()
+{
+	double a=0,b=0,c=0;
+	cout<<"请输入三角形的三边长度:";
+	do
+	{
+		if(a!=0)
+		{
+			cout<<"你输入的三角形不合法";
+		}
+		cin>>a>>b>>c;
+	}
+	while(a+b<=c||a+c<=b||b+c<=a);
+	cout<<"三角形周长:"<<a+b+c;
+}
