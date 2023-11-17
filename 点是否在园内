@@ -1,0 +1,19 @@
+#include<iostream>
+#include<math.h>
+using namespace std;
+void main()
+{
+	double x,y,c_x,c_y,r;
+	cout<<"请输入一个点:";
+	cin>>x>>y;
+	cout<<"请输入一个圆心和半径";
+	cin>>c_x>>c_y>>r;
+	if(sqrt(pow(c_x-x,2)+pow(c_y-y,2))>r)
+	{
+		cout<<"点("<<x<<","<<y<<")不在圆内";
+	}
+	else
+	{
+		cout<<"点("<<x<<","<<y<<")在圆内";
+	}
+}
