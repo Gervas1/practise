@@ -1,0 +1,16 @@
+#include<iostream>
+#include<math.h>
+using namespace std;
+void main()
+{
+	double a_x,a_y,b_x,b_y,c_x,c_y;
+	double ab,bc,ca;
+	cout<<"请输入三角形的三点坐标:";
+	cin>>a_x>>a_y>>b_x>>b_y>>c_x>>c_y;
+	bc=sqrt(pow(b_x-c_x,2)+pow(b_y-c_y,2));
+	ca=sqrt(pow(c_x-a_x,2)+pow(c_y-a_y,2));
+	ab=sqrt(pow(a_x-b_x,2)+pow(a_y-b_y,2));
+	cout<<"三角形:A="<<acos((bc*bc-ca*ca-ab*ab)/(-2*ca*ab))/3.14*180;
+	cout<<"°\nB="<<acos((ca*ca-bc*bc-ab*ab)/(-2*bc*ab))/3.14*180<<
+	cout<<"°\nC="<<acos((ab*ab-ca*ca-bc*bc)/(-2*ca*bc))/3.14*180<<"°"<<endl;
+}
