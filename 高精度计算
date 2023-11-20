@@ -15,7 +15,6 @@ vector<int> add(vector<int> &A, vector<int> &B){
     if(t) C.push_back(1);
     return C;
 }
-
 int main(){
     string a, b;
     vector<int> A, B;
