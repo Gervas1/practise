@@ -1,0 +1,16 @@
+最大圆距离
+#include<iostream>
+#include<math.h>
+using namespace std;
+double toRadian(double a)//把角度转成弧度制
+{
+	double pi=3.1415926;
+	return a/180*pi;
+}
+void main()
+{
+	double f_x,f_y,s_x,s_y;
+	cout<<"请输入两点的经纬度：";
+	cin>>f_x>>f_y>>s_x>>s_y;
+	cout<<"两点距离为："<<6371.01*acos(sin(toRadian(f_x))*sin(toRadian(s_x))+cos(toRadian(f_x))*cos(toRadian(s_x))*cos(toRadian(f_y-s_y)))<<"km";
+}
