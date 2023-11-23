@@ -12,6 +12,7 @@ vector<int> add(vector<int> &A, vector<int> &B){
         t /= 10;
     }
     if(t) C.push_back(1);
+
     return C;
 }
 int main(){
