@@ -1,0 +1,33 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+struct Activity {
+    int start;
+    int end;
+};
+
+bool compare(Activity a, Activity b) {
+    return a.end < b.end;
+}
+
+int maxActivities(vector<Activity>& activities) {
+    sort(activities.begin(), activities.end(), compare);
+    int count = 1;
+    int end = activities[0].end;
+    for (int i = 1; i < activities.size(); i++) {
+        if (activities[i].start >= end) {
+            count++;
+            end = activities[i].end;
+        }
+    }
+    return count;
+}
+
+int main() {
+    vector<Activity> activities = {{1, 4}, {3, 5}, {0, 6}, {5, 7}, {3, 9}, {5, 9}, {6, 10}, {8, 11}, {8, 12}, {2, 14}, {12, 16}};
+    int maxCount = maxActivities(activities);
+    cout << "最多的互不冲突的活动数量为：" << maxCount << endl;
+    return 0;
+}
