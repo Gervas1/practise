@@ -1,0 +1,17 @@
+关系算法类似与条件表达式一样的作用，主要用来判断容器中元素是否相等等运算，主要有以下8个：
+
+equal:两容器元素是否都相同
+
+includes:是否是包含关系
+
+lexicographical_compare:比较两个序列
+
+max:求最大值
+
+max_element:返回最大值的iterator
+
+min:求最小值
+
+min_element:求最小值的iterator
+
+mismatch:找到第一个不同的位置
