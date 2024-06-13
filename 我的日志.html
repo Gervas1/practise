@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>我的日志</title>
+    <link rel="stylesheet" href="./css/common.css">
+    <style>
+        body {
+            background: url(./images/日志背景.jpg) no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        body .nav {
+            height: 53px;
+            background: url(./images/navi.jpg);
+            position: relative;
+            position: sticky;
+            top: 0;
+            z-index: 12;
+            /* flex: auto; */
+        }
+
+        span::before {
+            content: "\e900";
+            font-family: "icomoon";
+            padding-left: 1.5625rem;
+            margin-right: 10px;
+            float: left;
+            line-height: 50px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul li {
+            float: left;
+            width: 120px;
+            height: 50px;
+            list-style: none;
+            perspective: 500px;
+            /* margin-left: 10px; */
+            text-align: center;
+            line-height: 50px;
+        }
+
+        .box {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: all .4s;
+        }
+
+        .box:hover {
+            transform: rotateX(90deg);
+        }
+
+        .front,
+        .bottom {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+        }
+
+        .front {
+            background: rgb(182, 224, 248);
+            z-index: 1;
+            transform: translateZ(25px)
+        }
+
+        .bottom {
+            background: rgb(182, 224, 248);
+            transform: translateY(25px) rotateX(-90deg);
+            color: #fff;
+        }
+
+        .user {
+            float: right;
+            line-height: 52px;
+            margin-right: 30px;
+            font-size: 16px;
+            color: #666;
+            vertical-align: middle;
+            perspective: 500px;
+        }
+
+        .user img {
+            /* padding-top: 5px; */
+            padding-right: 10px;
+            height: 40px;
+            width: 50px;
+            border-radius: 10%;
+            position: relative;
+        }
+
+        .user img:hover {
+            transform: translate3d(-5px, 5px, 150px);
+        }
+
+        /* 下拉菜单 */
+        .mi {
+            position: relative;
+            width: 223px;
+            /* margin: auto; */
+        }
+
+        .result-list {
+            display: none;
+            position: absolute;
+            left: 1190px;
+            top: 52px;
+            width: 223px;
+            border: 1px solid #60d4e4;
+            /* border-top: 0; */
+            background: #82d8da;
+        }
+
+        .result-list a {
+            display: block;
+            width: 223px;
+            /* padding: 6px 15px; */
+            font-size: 12px;
+            color: #424242;
+            text-decoration: none;
+        }
+
+        .result-list a:hover {
+            background-color: #4798a7;
+        }
+
+        .title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 10vmin;
+            line-height: 20vmin;
+            color: transparent;
+            background: conic-gradient(#D9D7F1 12%,
+                    #a990e0 10%, #a093bc 33%,
+                    #E7FBBE 33%, #E7FBBE 55%,
+                    #FFCBCB 55%, #FFCBCB 70%,
+                    #B5DEFF 70%, #B5DEFF 87%,
+                    #F7D1BA 87%);
+            background-size: 50%;
+            background-clip: text;
+            -webkit-background-clip: text;
+            margin-left: 110px;
+        }
+
+        .info {
+            width: 1200px;
+            margin: 0 auto;
+            /* position: relative; */
+            /* text-align: center; */
+        }
+
+        .info .uname {
+            width: 1200px;
+            height: 300px;
+            outline: none;
+            border-radius: 5px;
+            border: 1px solid #b8daff;
+            padding-left: 5px;
+            box-sizing: border-box;
+            margin-right: 15px;
+            border-radius: 10px;
+            border: #a3dbc2 solid 1px;
+        }
+
+        button {
+            /* position: absolute; */
+            float: right;
+            width: 100px;
+            height: 30px;
+            background-color: #6abca7;
+            outline: none;
+            border: 0;
+            color: #504e4e;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+            margin-left: 20px;
+        }
+
+        #log-list {
+            height: 200px;
+        }
+
+        #log-items {
+            list-style-type: none;
+            padding-left: 110px;
+        }
+
+        #log-items li {
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            padding-left: 110px;
+            color: #7998b8;
+        }
+
+        label {
+            display: block;
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        #log-form input {
+            width: 100%;
+            height: 40px;
+            padding: 5px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            border: #a3dbc2 solid 1px;
+        }
+
+        #comments {
+            width: 1200px;
+            margin: 0 auto;
+
+        }
+
+        #nameInput {
+            width: 100%;
+            height: 40px;
+            padding: 5px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            border: #a3dbc2 solid 1px;
+        }
+
+        #commentText {
+            width: 100%;
+            height: 100px;
+            padding: 5px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            border: #a3dbc2 solid 1px;
+            resize: none;
+            outline: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="nav">
+        <span></span>
+        <ul>
+            <li>
+                <div class="box">
+                    <div class="front">首页</div>
+
+                    <div class="bottom"><a href="index.html">来首页看看吧</a></div>
+
+                </div>
+            </li>
+            <li>
+                <div class="box">
+                    <div class="front">个人主页</div>
+                    <div class="bottom"><a href="./个人主页.html">点击进入主页</a></div>
+                </div>
+            </li>
+            <li>
+                <div class="box">
+                    <div class="front">我的日志</div>
+                    <div class="bottom"><a href="我的日志.html">这里用来记录</a></div>
+                </div>
+            </li>
+            <li>
+                <div class="box">
+                    <div class="front">照片墙</div>
+                    <div class="bottom"><a href="照片墙.html">这里都是照片</a></div>
+                </div>
+            </li>
+            <li>
+                <div class="box">
+                    <div class="front">我的待办集</div>
+                    <div class="bottom"><a href="./待办集.html">今日任务</a></div>
+                </div>
+            </li>
+        </ul>
+        <div class="user">
+            <img src="./images/user.png" alt="" style="vertical-align : middle;">
+            <em>Gervas</em>
+        </div>
+        <div class="mi">
+            <ul class="result-list">
+                <li><a href="./个人主页.html">个人主页</a></li>
+                <li><a href="./我的日志.html">我的日志</a></li>
+                <li><a href="./照片墙.html">照片墙</a></li>
+                <li><a href="./待办集.html">我的待办集</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="title">我的日志本！</div>
+    <br>
+    <!-- <div class="littleTitle"> 开始写日志</div> -->
+    <br>
+    <section id="log-list">
+        <h2>日志列表</h2>
+        <ul id="log-items">
+            <!-- 日志项将通过JavaScript动态添加 -->
+        </ul>
+    </section>
+    <section id="log-form">
+        <h2>写新日志</h2>
+        <form id="new-log-form" class="info" autocomplete="off">
+            <label for="log-title">日期:</label>
+            <input type="text" id="log-title" required>
+            <label for="log-content">内容:</label>
+            <textarea type="text" id="log-content" class="uname" name="uname" placeholder="开始记录今天的趣事吧！"
+                required></textarea>
+            <button type="submit" class="btn">保存日志</button>
+        </form>
+    </section>
+    <h2>留言</h2>
+    <section id="comments">
+
+        <form id="commentForm">
+            <label for="log-title">您的昵称:</label>
+            <input type="text" id="nameInput" placeholder="姓名">
+            <label for="log-title">留言:</label>
+            <textarea id="commentText" placeholder="在这里留下你的评论"></textarea>
+            <button type="submit">提交</button>
+        </form>
+        <div id="commentList"></div>
+    </section>
+
+    </form>
+
+    <script>
+        // 下拉菜单悬停效果
+        const user = document.querySelector('.user img')
+        const ul = document.querySelector('.result-list')
+        user.addEventListener('mouseenter', function () {
+            ul.style.display = 'block'
+        })
+        user.addEventListener('mouseleave', function () {
+            ul.style.display = 'none'
+        })
+        ul.addEventListener('mouseenter', function () {
+            ul.style.display = 'block'
+        })
+        ul.addEventListener('mouseleave', function () {
+            ul.style.display = 'none'
+        })
+        document.getElementById('new-log-form').addEventListener('submit', function (event) {
+            event.preventDefault(); // 阻止表单的默认提交行为
+
+            // 获取输入的日志标题和内容
+            var title = document.getElementById('log-title').value;
+            var content = document.getElementById('log-content').value;
+
+            // 创建一个新的日志项
+            var logItem = document.createElement('li');
+            logItem.innerHTML = '<h3>' + title + '</h3><p>' + content + '</p>';
+
+            // 将日志项添加到日志列表中
+            var logList = document.getElementById('log-items');
+            logList.appendChild(logItem);
+
+            // 清空表单输入
+            document.getElementById('log-title').value = '';
+            document.getElementById('log-content').value = '';
+        });
+        // 保存评论
+        document.getElementById('commentForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            var nameInput = document.getElementById('nameInput').value;
+            var commentText = document.getElementById('commentText').value;
+            document.getElementById('nameInput').value = '';
+            document.getElementById('commentText').value = '';
+            var commentItem = document.createElement('div');
+            commentItem.innerHTML = '<strong>' + nameInput + ':</strong> ' + commentText;
+            document.getElementById('commentList').appendChild(commentItem);
+        });
+    </script>
+</body>
+
+</html>

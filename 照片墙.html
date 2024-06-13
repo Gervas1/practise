@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>照片墙</title>
+    <!-- <link rel="stylesheet" href="./css/common.css"> -->
+    <style>
+        @font-face {
+            font-family: 'icomoon';
+            src: url('../fonts/icomoon.eot?tomleg');
+            src: url('../fonts/icomoon.eot?tomleg#iefix') format('embedded-opentype'),
+                url('../fonts/icomoon.ttf?tomleg') format('truetype'),
+                url('../fonts/icomoon.woff?tomleg') format('woff'),
+                url('../fonts/icomoon.svg?tomleg#icomoon') format('svg');
+            font-weight: normal;
+            font-style: normal;
+            font-display: block;
+        }
+
+        body {
+            background-color: rgb(255, 158, 74);
+            perspective: 1000px;
+            font-family: "icomoon";
+        }
+
+        a {
+            text-decoration: none;
+            color: #000;
+        }
+
+        .nav {
+            height: 53px;
+            background: rgb(224, 113, 16);
+            /* position: relative; */
+            position: sticky;
+            top: 0;
+            z-index: 12;
+            font-family: "icomoon";
+            /* flex: auto; */
+        }
+
+        .nav span::before {
+            content: "";
+            font-family: "icomoon";
+            padding-left: 1.5625rem;
+            margin-right: 10px;
+            float: left;
+            line-height: 50px;
+            /* z-index: 13; */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav ul li {
+            float: left;
+            width: 120px;
+            height: 50px;
+            list-style: none;
+            perspective: 500px;
+            /* margin-left: 10px; */
+            text-align: center;
+            line-height: 50px;
+        }
+
+        .nav .box {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: all .4s;
+        }
+
+        .nav .box:hover {
+            transform: rotateX(90deg);
+        }
+
+        .nav .front,
+        .nav .bottom {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+        }
+
+        .nav .front {
+            background: rgb(224, 113, 16);
+            z-index: 1;
+            transform: translateZ(25px)
+        }
+
+        .nav .bottom {
+            background: rgb(224, 113, 16);
+            transform: translateY(25px) rotateX(-90deg);
+            color: #fff;
+        }
+
+        .user {
+            float: right;
+            line-height: 52px;
+            margin-right: 30px;
+            font-size: 16px;
+            color: #666;
+            vertical-align: middle;
+            perspective: 500px;
+        }
+
+        .user img {
+            /* padding-top: 5px; */
+            padding-right: 10px;
+            height: 40px;
+            width: 40px;
+            border-radius: 10%;
+            position: relative;
+        }
+
+        .user img:hover {
+            transform: translate3d(-5px, 5px, 150px);
+        }
+
+        /* 下拉菜单 */
+        .nav .mi {
+            position: relative;
+            width: 223px;
+            /* margin: auto; */
+        }
+
+        .nav .result-list {
+            display: none;
+            position: absolute;
+            left: 1190px;
+            top: 52px;
+            width: 223px;
+            border: 1px solid #f394c5;
+            /* border-top: 0; */
+            background: #f0e8a1;
+        }
+
+        .nav .result-list a {
+            display: block;
+            width: 223px;
+            /* padding: 6px 15px; */
+            font-size: 12px;
+            color: #424242;
+            text-decoration: none;
+        }
+
+        .nav .result-list a:hover {
+            background-color: #d3e0a2;
+        }
+
+        section {
+            position: relative;
+            width: 300px;
+            height: 200px;
+            margin: 100px auto;
+            transform-style: preserve-3d;
+            animation: rotate linear infinite 10s;
+        }
+
+        section:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotateY(0);
+            }
+
+            100% {
+                transform: rotateY(360deg)
+            }
+        }
+
+        section div {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url(images/message2.jpg) no-repeat center center;
+            background-size: 300px 300px;
+        }
+
+        section div:nth-child(1) {
+            transform: translateZ(300px);
+            background: url(images/Monday.jpg) no-repeat center center;
+            background-size: 300px 300px;
+        }
+
+        section div:nth-child(2) {
+            transform: rotateY(60deg) translateZ(300px);
+            background: url(./images/body.jpg) no-repeat center center;
+            background-size: 300px 300px;
+        }
+
+        section div:nth-child(3) {
+            transform: rotateY(120deg) translateZ(300px);
+            background: url(./images/bgc2.jpg) no-repeat center center;
+            background-size: 300px 300px;
+        }
+
+        section div:nth-child(4) {
+            transform: rotateY(180deg) translateZ(300px);
+            background: url(./images/navi.jpg) no-repeat center center;
+            background-size: 300px 300px;
+        }
+
+        section div:nth-child(5) {
+            transform: rotateY(240deg) translateZ(300px);
+            background: url(./images/picture1.jpg) no-repeat center center;
+            background-size: 300px 300px;
+        }
+
+        section div:nth-child(6) {
+            transform: rotateY(300deg) translateZ(300px);
+            background: url(./images/picture6.jpg) no-repeat center center;
+            background-size: 300px 300px;
+        }
+
+        section div:nth-child(7) {
+            transform: rotateY(300deg) translateZ(300px);
+            background: url(./images/picture6.jpg) no-repeat center center;
+            background-size: 300px 300px;
+        }
+
+        section div:nth-child(8) {
+            transform: rotateY(300deg) translateZ(300px);
+            background: url(./images/picture6.jpg) no-repeat center center;
+            background-size: 300px 300px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .shou ul {
+            width: 900px;
+            height: 280px;
+            border: 1px solid;
+            margin: 50px auto;
+            overflow: hidden;
+        }
+
+        .shou ul li {
+            width: 100px;
+            height: 200px;
+            float: left;
+            transition: width 0.5s;
+        }
+
+        .shou ul li img {
+            width: 400px;
+            height: 280px;
+        }
+
+        .shou ul:hover li {
+            width: 100px;
+        }
+
+        .shou ul li:hover {
+            width: 400px;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .shou ul {
+            width: 900px;
+            height: 280px;
+            border: 1px solid;
+            margin: 50px auto;
+            overflow: hidden;
+        }
+
+        .shou ul li {
+            width: 225px;
+            height: 280px;
+            float: left;
+        }
+
+        .shou ul li img {
+            width: 225px;
+            height: 280px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="nav">
+        <span></span>
+        <ul>
+            <li>
+                <div class="box">
+                    <div class="front">首页</div>
+
+                    <div class="bottom"><a href="index.html">来首页看看吧</a></div>
+
+                </div>
+            </li>
+            <li>
+                <div class="box">
+                    <div class="front">个人主页</div>
+                    <div class="bottom"><a href="./个人主页.html">点击进入主页</a></div>
+                </div>
+            </li>
+            <li>
+                <div class="box">
+                    <div class="front">我的日志</div>
+                    <div class="bottom"><a href="我的日志.html">这里用来记录</a></div>
+                </div>
+            </li>
+            <li>
+                <div class="box">
+                    <div class="front">照片墙</div>
+                    <div class="bottom"><a href="./照片墙.html">这里都是照片</a></div>
+                </div>
+            </li>
+            <li>
+                <div class="box">
+                    <div class="front">我的待办集</div>
+                    <div class="bottom"><a href="./待办集.html">今日任务</a></div>
+                </div>
+            </li>
+        </ul>
+        <div class="user">
+            <img src="./images/user.png" alt="" style="vertical-align : middle;">
+            <em>Gervas</em>
+        </div>
+        <div class="mi">
+            <ul class="result-list">
+                <li><a href="./个人主页.html">个人主页</a></li>
+                <li><a href="./我的日志.html">我的日志</a></li>
+                <li><a href="./照片墙.html">照片墙</a></li>
+                <li><a href="./待办集.html">我的待办集</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="shou">
+        <ul>
+            <li><img src="images/Friday.jpg" alt=""></li>
+            <li><img src="images/Monday.jpg" alt=""></li>
+            <li><img src="images/Wednesday.jpg" alt=""></li>
+            <li><img src="images/bgc1.jpg" alt=""></li>
+            <li><img src="images/personal.jpg" alt=""></li>
+            <li><img src="images/Monday.jpg" alt=""></li>
+        </ul>
+    </div>
+
+    <section>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </section>
+    <script>
+        // 下拉菜单悬停效果
+        const user = document.querySelector('.user img')
+        const ul = document.querySelector('.result-list')
+        user.addEventListener('mouseenter', function () {
+            ul.style.display = 'block'
+        })
+        user.addEventListener('mouseleave', function () {
+            ul.style.display = 'none'
+        })
+        ul.addEventListener('mouseenter', function () {
+            ul.style.display = 'block'
+        })
+        ul.addEventListener('mouseleave', function () {
+            ul.style.display = 'none'
+        })
+    </script>
+</body>
+
+</html>

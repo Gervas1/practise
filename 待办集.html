@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/待办.css">
+</head>
+
+<body>
+    <div class="nav">
+
+        <span></span>
+        <ul>
+            <li>
+                <div class="box">
+                    <div class="front">首页</div>
+
+                    <div class="bottom"><a href="index.html">来首页看看吧</a></div>
+
+                </div>
+            </li>
+            <li>
+                <div class="box">
+                    <div class="front">个人主页</div>
+                    <div class="bottom"><a href="./个人主页.html">点击进入主页</a></div>
+                </div>
+            </li>
+            <li>
+                <div class="box">
+                    <div class="front">我的日志</div>
+                    <div class="bottom"><a href="我的日志.html">这里用来记录</a></div>
+                </div>
+            </li>
+            <li>
+                <div class="box">
+                    <div class="front">照片墙</div>
+                    <div class="bottom"><a href="./照片墙.html">这里都是照片</a></div>
+                </div>
+            </li>
+            <li>
+                <div class="box">
+                    <div class="front">我的待办集</div>
+                    <div class="bottom"><a href="./待办集.html">今日任务</a></div>
+                </div>
+            </li>
+        </ul>
+        <div class="user">
+            <img src="./images/user.png" alt="" style="vertical-align : middle;">
+            <em>Gervas</em>
+        </div>
+        <div class="mi">
+            <ul class="result-list">
+                <li><a href="./个人主页.html">个人主页</a></li>
+                <li><a href="./我的日志.html">我的日志</a></li>
+                <li><a href="./照片墙.html">照片墙</a></li>
+                <li><a href="./待办集.html">我的待办集</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- daiban -->
+    <div class="main">
+        <h1>待办事项</h1>
+
+        <form id="todo-form">
+            <input type="text" id="todo-input">
+            <button type="submit">添加</button>
+        </form>
+
+        <ul id="todo-list">
+        </ul>
+
+    </div>
+    <script type="text/javascript" src="./js/待办.js"></script>
+
+</body>
+
+</html>

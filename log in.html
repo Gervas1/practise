@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人博客</title>
+    <style>
+        a {
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        body {
+            background: url('./images/登录界面背景图.jpg') no-repeat;
+            background-size: 100% 150%;
+        }
+
+        .login_box {
+            width: 20%;
+            height: 400px;
+            background-color: #05050560;
+            margin-left: 20%;
+            margin-top: 10%;
+            text-align: center;
+            border-radius: 10px;
+            padding: 50px 50px;
+        }
+
+        h2 {
+            color: #ffffff90;
+            margin-top: 5%;
+        }
+
+        .input-box {
+            margin-top: 5%;
+            position: relative;
+        }
+
+        span {
+            color: #fff;
+        }
+
+        input {
+            border: 0;
+            width: 60%;
+            font-size: 15px;
+            color: #fff;
+            background: transparent;
+            border-bottom: 2px solid #fff;
+            padding: 5px 10px;
+            outline: none;
+            margin-top: 10px;
+        }
+
+        img {
+            position: absolute;
+            top: 41.5%;
+            left: 39%;
+            width: 15px;
+            height: 12px;
+            opacity: 0.3;
+        }
+
+        button {
+            margin-top: 50px;
+            width: 60%;
+            height: 30px;
+            border-radius: 10px;
+            border: 0;
+            color: #fff;
+            text-align: center;
+            line-height: 30px;
+            font-size: 15px;
+            background-image: linear-gradient(to right, #30cfd0, #330867);
+        }
+
+        #sign_up {
+            margin-top: 45%;
+            margin-left: 60%;
+        }
+
+        a:hover {
+            color: #b94648;
+        }
+
+        .reminder {
+            padding-top: 40px;
+        }
+
+        .xtx-login-footer .copyright {
+            height: 115px;
+            padding-top: 30px;
+            text-align: center;
+            color: #999;
+            font-size: 15px;
+        }
+
+        .xtx-login-footer .copyright p {
+            line-height: 1;
+            margin-bottom: 20px;
+        }
+
+        .xtx-login-footer .copyright a {
+            color: #070808;
+            line-height: 100%;
+            padding: 0 10px 0 6px;
+            border-right: 1px solid #999;
+        }
+
+        .xtx-login-footer .copyright a:hover {
+            color: #b94648;
+
+        }
+
+        .xtx-login-footer .copyright a:last-child {
+            border-right: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login_box">
+        <h2>LOGIN</h2>
+        <div class="input_box">
+            <input class="name" type="text" placeholder="请输入用户名">
+        </div>
+        <div class="input_box">
+            <input class="pass" type="password" id="pwd" placeholder="请输入密码">
+            <img src="./images/close.jpg" alt="" id="eye">
+        </div>
+        <button id="m1">登录</button><br>
+        <div class="reminder">
+            没有账号？<a href="./register.html">注册</a>一个吧
+        </div>
+        <div class="xtx-login-footer">
+            <div class="copyright">
+                <p>
+                    <a href="javascript:;">关于我们</a>
+                    <a href="javascript:;">帮助中心</a>
+                    <a href="./register.html">用户注册</a>
+                </p>
+                <p>湖南科技大学·Gervas</p>
+            </div>
+        </div>
+    </div>
+    <script>
+        const name = document.querySelector('.name')
+        const pass = document.querySelector('.pass')
+        const btn = document.querySelector('button')
+        let i = 5
+        btn.addEventListener('click', function () {
+            if (name.value === 'Gervas' && pass.value === '123789') {
+                window.location.href = "index.html"
+                alert('欢迎！')
+            }
+            else if (name.value !== 'Gervas') {
+                alert('用户名输入错误，请重新输入')
+            }
+            else if (pass.value.length < 6) {
+                alert('密码不能少于六位数，请重新输入！')
+            }
+            else if (pass.value !== 123789) {
+                if (i === 1) {
+                    alert('请稍后再试')
+                    i--
+                }
+                else {
+                    alert(`密码错误，请重新输入,您还有${i - 1}次机会`)
+                    i--
+                }
+            }
+            if (i === 0) {
+                btn.disabled = true
+                let j = 5
+                let n = setInterval(function () {
+                    j--
+                    btn.innerHTML = (`（${j})s后您可继续尝试`)
+                    if (j === 0) {
+                        clearInterval(n)
+                        btn.disabled = false
+                        btn.innerHTML = '登录'
+                    }
+                }, 1000)
+                i = 5
+            }
+        })
+        // 眼睛
+        var eye = document.getElementById("eye");
+        var pwd = document.getElementById("pwd");
+        var a = 0;
+        eye.onclick = function () {
+            if (a == 0) {
+                pwd.type = "text";
+                eye.src = "./images/open.jpg";
+                a = 1;
+            } else {
+                pwd.type = "password";
+                eye.src = "./images/close.jpg";
+                a = 0;
+            }
+        }
+        //enter键登录
+        pass.addEventListener('keyup', function (e) {
+            if (e.key === 'Enter') {
+                btn.click()
+            }
+        })
+    </script>
+</body>
+
+</html>
