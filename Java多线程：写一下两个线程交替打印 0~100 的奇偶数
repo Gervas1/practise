@@ -1,0 +1,44 @@
+这种实现方式的原理就是线程1打印之后唤醒其他线程，然后让出锁，自己进入休眠状态。因为进入了休眠状态就不会与其他线程抢锁，此时只有线程2在获取锁，所以线程2必然会拿到锁。线程2以同样的逻辑执行，唤醒线程1并让出自己持有
+的锁，自己进入休眠状态。这样来来回回，持续执行直到任务完成。就达到了两个线程交替获取锁的效果了。                       
+原文链接：https://blog.csdn.net/ZHANGLIZENG/article/details/119974793
+private int count = 0;
+private final Object lock = new Object();
+ 
+public void turning() throws InterruptedException {
+   Thread even = new Thread(() -> {
+       while (count <= 100) {
+           synchronized (lock) {
+               System.out.println("偶数: " + count++);
+               lock.notifyAll();
+               try {
+               	   // 如果还没有结束，则让出当前的锁并休眠
+                   if (count <= 100) {
+                       lock.wait();
+                   }
+               } catch (InterruptedException e) {
+                   e.printStackTrace();
+               }
+           }
+       }
+   });
+   Thread odd = new Thread(() -> {
+       while (count <= 100) {
+           synchronized (lock) {
+               System.out.println("奇数: " + count++);
+               lock.notifyAll();
+               try {
+                   // 如果还没有结束，则让出当前的锁并休眠
+                   if (count <= 100) {
+                       lock.wait();
+                   }
+               } catch (InterruptedException e) {
+                   e.printStackTrace();
+               }
+           }
+       }
+   });
+   even.start();
+   // 确保偶数线程线先获取到锁
+   Thread.sleep(1);
+   odd.start();
+}
